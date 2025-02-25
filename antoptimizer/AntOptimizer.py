@@ -1,5 +1,4 @@
 import random
-from graph import Graph
 
 
 class AntOptimizer:
@@ -167,27 +166,3 @@ class AntOptimizer:
                     key = (v, weight)
                     if key in self.pheromones[u]:
                         self.pheromones[u][key] += 1 / length
-
-
-if __name__ == "__main__":
-    gr = Graph()
-    file = input("Введите имя файла с графом: ")
-    with open(file, "r") as f:
-        f.readline()
-        for line in f:
-            print(line)
-            u, v, weight = line.strip().split()
-            gr.add_edge(u, v, float(weight))
-
-    n_ants = 1
-    n_iterations = 99
-
-    ant = AntOptimizer(gr, n_ants, n_iterations)
-
-    print("\n=== Поиск кратчайшего гамильтонова цикла ===")
-    hamiltonian_cycle, hamiltonian_length = ant.find_hamiltonian_cycle(
-        start_node=list(gr.nodes.keys())[0]
-    )
-
-    print("Гамильтонов цикл:", hamiltonian_cycle)
-    print("Длина цикла:", hamiltonian_length)
